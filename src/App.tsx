@@ -12,11 +12,35 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import dayjs, { Dayjs } from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 function App() {
+  dayjs.extend(localizedFormat);
+  dayjs.extend(relativeTime);
+
   const [date, setDate] = useState<Dayjs | null>(dayjs());
   const [format, setFormat] = useState("f");
   const [output, setOutput] = useState("");
+
+  const displayFormats: Record<string, string> = {
+    t: "LT",
+    T: "LTS",
+    d: "L",
+    D: "LL",
+    f: "LLL",
+    F: "LLLL",
+  };
+
+  const getDisplay = () => {
+    if (date) {
+      if (format === "R") {
+        return date.fromNow();
+      } else {
+        return date.format(displayFormats[format]);
+      }
+    }
+  };
 
   useEffect(() => {
     if (date) {
@@ -36,7 +60,7 @@ function App() {
         container
         sx={{ height: "100%", alignItems: "center", justifyContent: "center" }}
       >
-        <Grid item xs={6}>
+        <Grid item xs={12} md={8} lg={6}>
           <Card>
             <CardContent>
               <Grid
@@ -101,7 +125,22 @@ function App() {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item>
+                <Grid
+                  container
+                  item
+                  sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{ padding: "16px", marginRight: "8px" }}
+                  >
+                    <Typography variant="subtitle1" component="p">
+                      {getDisplay()}
+                    </Typography>
+                  </Paper>
                   <Paper elevation={3} sx={{ padding: "16px" }}>
                     <Typography variant="subtitle1" component="p">
                       {output}

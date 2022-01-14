@@ -17,6 +17,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import TooltipButton from "./TooltipButton";
 
 function App() {
   dayjs.extend(localizedFormat);
@@ -33,8 +34,20 @@ function App() {
 
   const [date, setDate] = useState<Dayjs | null>(dayjs());
 
+  const discordFormat = (key: string) => {
+    return `<t:${date!.unix()}:${key}>`;
+  };
+
+  const copyText = (key: string) => {
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(discordFormat(key));
+    } else {
+      document.execCommand("copy", true, discordFormat(key));
+    }
+  };
+
   return (
-    <Container sx={{ height: "100vh", padding: [4, 8] }} fixed>
+    <Container sx={{ height: "100vh", padding: [4] }} fixed>
       <Grid
         container
         direction="row"
@@ -104,7 +117,12 @@ function App() {
                     <TableCell component="th" scope="row">
                       {fmt[0]}
                     </TableCell>
-                    <TableCell>{`<t:${date!.unix()}:${key}>`}</TableCell>
+                    <TableCell>
+                      <TooltipButton
+                        btnText={discordFormat(key)}
+                        onClick={() => copyText(key)}
+                      />
+                    </TableCell>
                     <TableCell>{date!.format(fmt[1])}</TableCell>
                   </TableRow>
                 ))}
@@ -114,7 +132,12 @@ function App() {
                   <TableCell component="th" scope="row">
                     Relative Time
                   </TableCell>
-                  <TableCell>{`<t:${date!.unix()}:R>`}</TableCell>
+                  <TableCell>
+                    <TooltipButton
+                      btnText={discordFormat("R")}
+                      onClick={() => copyText("R")}
+                    />
+                  </TableCell>
                   <TableCell>{date!.fromNow()}</TableCell>
                 </TableRow>
               </TableBody>

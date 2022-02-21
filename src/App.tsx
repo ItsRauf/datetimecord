@@ -32,7 +32,7 @@ function App() {
     F: ["Long Date/Time", "LLLL"],
   };
 
-  const [date, setDate] = useState<Dayjs | null>(dayjs());
+  const [date, setDate] = useState<Dayjs | null>(dayjs().set("seconds", 0));
 
   const discordFormat = (key: string) => {
     return `<t:${date!.unix()}:${key}>`;

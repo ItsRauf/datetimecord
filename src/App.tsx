@@ -83,6 +83,8 @@ function App() {
           </Grid>
           <Grid item>
             <TimePicker
+              inputFormat="LTS"
+              views={["hours", "minutes", "seconds"]}
               renderInput={(props) => <TextField {...props} />}
               label="Time"
               value={date}

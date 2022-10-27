@@ -50,7 +50,7 @@ function App() {
     <Container sx={{ height: "100vh", padding: [4] }} fixed>
       <Grid
         container
-        direction="row"
+        direction={{ xs: "row", sm: "column" }}
         sx={{ height: "100%" }}
         justifyContent="center"
         alignItems="center"
@@ -94,13 +94,7 @@ function App() {
             />
           </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          spacing={2}
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Grid container item justifyContent="center" alignItems="center">
           <TableContainer component={Paper}>
             <Table aria-label="DateTimeCord Table">
               <TableHead>

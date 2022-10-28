@@ -61,7 +61,7 @@ function App() {
             DateTimeCord
           </Typography>
           <Typography variant="subtitle2" gutterBottom component="p">
-            Helper Tool for Date and Time formatting in Discord
+            Helper tool for date and time formatting in Discord
           </Typography>
         </Grid>
         <Grid

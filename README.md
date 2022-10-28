@@ -6,4 +6,4 @@ Timestamps were added to markdown in Discord, unfortunately with no U.I. for cre
 
 This tool solves that issue by providing a simple U.I. for selecting and formatting dates automatically!
 
-![screenshot of website](https://user-images.githubusercontent.com/68407783/198419003-65969e37-f5db-472b-8f13-4b2ca2c77c10.png)
+![screenshot of website](https://user-images.githubusercontent.com/68407783/198419972-64aeba87-de8a-4a80-8b2e-267077935b39.png)
